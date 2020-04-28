@@ -229,6 +229,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/29/03.%E5%AF%B9%E8%A1%A8%E6%A0%BCWorld%20%E6%9F%A5%E8%AF%A2%E5%85%A8%E7%90%83%E5%90%84%E5%9B%BD%E7%9A%84%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="扫一地落叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫一地落叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/29/03.%E5%AF%B9%E8%A1%A8%E6%A0%BCWorld%20%E6%9F%A5%E8%AF%A2%E5%85%A8%E7%90%83%E5%90%84%E5%9B%BD%E7%9A%84%E8%B5%84%E6%96%99/" itemprop="url">03.对表格World 查询全球各国的资料</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-29T00:18:57+08:00">
+                2020-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.觀察運行一個簡單的SQL命令的結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, continent, population FROM world</span><br></pre></td></tr></table></figure>
+
+<p>2.<a href="https://sqlzoo.net/wiki/WHERE_filters" target="_blank" rel="noopener">如何使用WHERE來篩選記錄。</a> 顯示具有至少2億人口的國家名稱。 2億是200000000，有八個零。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE population&gt;200000000</span><br></pre></td></tr></table></figure>
+
+<p>3.找出有至少200百萬(2億)人口的國家名稱，及人均國內生產總值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,gdp&#x2F;population FROM world WHERE population&gt;200000000</span><br></pre></td></tr></table></figure>
+
+<p>4.顯示’South America’南美洲大陸的國家名字和以百萬為單位人口數。 將人口population 除以一百萬(1000000)得可得到以百萬為單位人口數。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, population&#x2F;1000000 FROM world WHERE continent &#x3D; &#39;South America&#39;</span><br></pre></td></tr></table></figure>
+
+<p>5.顯示法國，德國，意大利(France, Germany, Italy)的國家名稱和人口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, population FROM world WHERE name IN (&#39;France&#39;,&#39;Germany&#39;,&#39;Italy&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>6顯示包含單詞“United”為名稱的國家。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%United%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>7.成為大國的兩種方式：如果它有3百萬平方公里以上的面積，或擁有250百萬(2.5億)以上人口。</p>
+<p>展示大國的名稱，人口和面積。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, population, area FROM world WHERE area &gt; 3000000 OR population &gt; 250000000</span><br></pre></td></tr></table></figure>
+
+<p>8.美國、印度和中國(USA, India, China)是人口又大，同時面積又大的國家。排除這些國家。</p>
+<p>顯示以人口或面積為大國的國家，但不能同時兩者。顯示國家名稱，人口和面積</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, population, area FROM world WHERE (area &gt; 3000000 AND population &lt; 250000000) OR(area &lt; 3000000 AND population &gt; 250000000)</span><br></pre></td></tr></table></figure>
+
+<p>9.除以為1000000（6個零）是以百萬計。除以1000000000（9個零）是以十億計。使用 <a href="https://sqlzoo.net/wiki/ROUND" target="_blank" rel="noopener">ROUND</a> 函數來顯示的數值到小數點後兩位。</p>
+<p>對於南美顯示以百萬計人口，以十億計2位小數GDP。</p>
+<p>百萬和十億</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, ROUND(population&#x2F;1000000, 2), ROUND(gdp&#x2F;1000000000, 2) FROM world WHERE continent &#x3D; &#39;South America&#39;</span><br></pre></td></tr></table></figure>
+
+<p>10.顯示國家有至少一個萬億元國內生產總值（萬億，也就是12個零）的人均國內生產總值。四捨五入這個值到最接近1000。</p>
+<p>顯示萬億元國家的人均國內生產總值，四捨五入到最近的$ 1000。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, ROUND(gdp&#x2F;population&#x2F;1000)*1000 FROM world WHERE gdp &gt; 1000000000000</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-The-CASE-statement-shown-is-used-to-substitute-North-America-for-Caribbean-in-the-third-column"><a href="#11-The-CASE-statement-shown-is-used-to-substitute-North-America-for-Caribbean-in-the-third-column" class="headerlink" title="11.The CASE statement shown is used to substitute North America for Caribbean in the third column."></a>11.The <a href="https://sqlzoo.net/wiki/CASE" target="_blank" rel="noopener">CASE</a> statement shown is used to substitute <strong>North America</strong> for <strong>Caribbean</strong> in the third column.</h4><p>Show the name - but substitute <strong>Australasia</strong> for <strong>Oceania</strong> - for countries beginning with N.</p>
+<p>显示的<a href="https://sqlzoo.net/wiki/CASE" target="_blank" rel="noopener">CASE</a>语句用于在第三栏中用<strong>北美</strong>代替<strong>加勒比海地区</strong>。</p>
+<p>节目的名字-但替换<strong>澳大利亚</strong>的<strong>大洋洲</strong> -对国家开始N.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,CASE WHEN continent&#x3D;&#39;Oceania&#39; THEN &#39;Australasia&#39; ELSE continent END FROM world WHERE name LIKE &#39;N%&#39;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/28/02.%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,7 +863,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
