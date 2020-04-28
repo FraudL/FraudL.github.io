@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="了解为什么网站要反爬出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求网站如何识别爬虫？ 爬虫程序和一般人使用的工具：如浏览器、app等，对于网站服务端来说，都是客户端。网站反爬本质上是需要先找出真正人类用户和爬虫程序的区别。">
+<meta name="description" content="1.你可以用WHERE name LIKE &#39;B%&#39;來找出以 B 為開首的國家。%是萬用字元,可以用代表任何字完。 找出以 Y 為開首的國家。 1SELECT name FROM world WHERE name LIKE &#39;Y%&#39;  2.找出以 Y 為結尾的國家。 1SELECT name FROM world WHERE name LIKE &#39;%Y&amp;#3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="反爬">
-<meta property="og:url" content="https://fraudl.github.io/2020/04/27/my-blog/index.html">
+<meta property="og:title" content="02.文字样式匹配查询">
+<meta property="og:url" content="https://fraudl.github.io/2020/04/28/02.%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/index.html">
 <meta property="og:site_name" content="扫一地落叶">
-<meta property="og:description" content="了解为什么网站要反爬出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求网站如何识别爬虫？ 爬虫程序和一般人使用的工具：如浏览器、app等，对于网站服务端来说，都是客户端。网站反爬本质上是需要先找出真正人类用户和爬虫程序的区别。">
+<meta property="og:description" content="1.你可以用WHERE name LIKE &#39;B%&#39;來找出以 B 為開首的國家。%是萬用字元,可以用代表任何字完。 找出以 Y 為開首的國家。 1SELECT name FROM world WHERE name LIKE &#39;Y%&#39;  2.找出以 Y 為結尾的國家。 1SELECT name FROM world WHERE name LIKE &#39;%Y&amp;#3">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-27T10:12:25.000Z">
-<meta property="article:modified_time" content="2020-04-27T10:33:47.000Z">
+<meta property="article:published_time" content="2020-04-28T10:36:14.000Z">
+<meta property="article:modified_time" content="2020-04-28T10:36:14.000Z">
 <meta property="article:author" content="扫一地落叶">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://fraudl.github.io/2020/04/27/my-blog/"/>
+  <link rel="canonical" href="https://fraudl.github.io/2020/04/28/02.文字样式匹配查询/"/>
 
 
 
 
 
-  <title>反爬 | 扫一地落叶</title>
+  <title>02.文字样式匹配查询 | 扫一地落叶</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/27/my-blog/">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/28/02.%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="扫一地落叶">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">反爬</h1>
+          <h1 class="post-title" itemprop="name headline">02.文字样式匹配查询</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-27T18:12:25+08:00">
-                2020-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-28T18:36:14+08:00">
+                2020-04-28
               </time>
             
 
@@ -299,9 +299,66 @@
       
 
       
-        <h2 id="了解为什么网站要反爬"><a href="#了解为什么网站要反爬" class="headerlink" title="了解为什么网站要反爬"></a>了解为什么网站要反爬</h2><h4 id="出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求"><a href="#出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求" class="headerlink" title="出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求"></a>出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求</h4><h2 id="网站如何识别爬虫？"><a href="#网站如何识别爬虫？" class="headerlink" title="网站如何识别爬虫？"></a>网站如何识别爬虫？</h2><blockquote>
-<p>爬虫程序和一般人使用的工具：如浏览器、app等，对于网站服务端来说，都是客户端。网站反爬本质上是需要先找出真正人类用户和爬虫程序的区别。</p>
-</blockquote>
+        <p>1.你可以用<code>WHERE name LIKE &#39;B%&#39;</code>來找出以 B 為開首的國家。<br>%是萬用字元,可以用代表任何字完。</p>
+<p>找出以 Y 為開首的國家。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;Y%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>2.找出以 Y 為結尾的國家。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%Y&#39;</span><br></pre></td></tr></table></figure>
+
+<p>3.“Luxembourg 盧森堡”中有一個x字母,還有一個國家的名字中有x。列出這兩個國家。</p>
+<p>找出所有國家,其名字包括字母x。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%x%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>4.“Iceland 冰島”和“Switzerland 瑞士”的名字都是以”land”作結束的。還有其他嗎?</p>
+<p>找出所有國家,其名字以 land 作結尾。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%land&#39;</span><br></pre></td></tr></table></figure>
+
+<p>5.“Columbia 哥倫比亞”是以 C 作開始,ia 作結尾的。還有兩個國家相同。</p>
+<p>找出所有國家,其名字以 C 作開始,ia 作結尾。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;C%ia&#39;</span><br></pre></td></tr></table></figure>
+
+<p>6.“Greece 希臘”中有雙 e 字。哪個國家有雙 o 字呢?</p>
+<p>找出所有國家,其名字包括字母oo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%oo%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>7.“Bahamas 巴哈馬”中有三個 a,還有嗎?</p>
+<p>找出所有國家,其名字包括三個或以上的a。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%a%a%a%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>8.“India 印度”和”Angola 安哥拉”的第二個字母都是 n。<br>你可以用底線符<code>_</code>當作單一個字母的萬用字元。</p>
+<p>找出所有國家,其名字以t作第二個字母。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;_t%&#39; ORDER BY name</span><br></pre></td></tr></table></figure>
+
+<p>9.“Lesotho 賴索托”和”Moldova 摩爾多瓦”都有兩個字母 o,被另外兩個字母相隔着。</p>
+<p>找出所有國家,其名字都有兩個字母 o,被另外兩個字母相隔着。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%o__o%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>10.“Cuba古巴”和”Togo 多哥”都是 4 個字母。</p>
+<p>找出所有國家,其名字都是 4 個字母的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;____&#39;</span><br></pre></td></tr></table></figure>
+
+<p>11.“Luxembourg 盧森堡”的首都 capital 都同樣叫“Luxembourg”。</p>
+<p>顯示所有國家名字,其首都和國家名字是相同的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name &#x3D; capital</span><br></pre></td></tr></table></figure>
+
+<p>12.“Mexico 墨西哥”的首都是”Mexico City”。</p>
+<p>顯示所有國家名字,其首都是國家名字加上”City”。</p>
+<p>concat函數</p>
+<p>函數<code>concat</code> 可以用來合拼兩個或以上的字串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE capital &#x3D; concat(name ,&#39; City&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>13.<strong>找出所有首都和其國家名字,而首都要有國家名字中出現。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT capital, &#96;name&#96;  FROM	world WHERE capital LIKE concat(&#39;%&#39;,&#96;name&#96;,&#39;%&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>14.<strong>找出所有首都和其國家名字,而首都是國家名字的延伸。</strong><br><strong>你應顯示 Mexico City,因它比其國家名字 Mexico 長。</strong><br><strong>你不應顯示 Luxembourg,因它的首都和國家名相是相同的。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;name&#96;,capital FROM world WHERE capital LIKE concat( &#96;name&#96;, &#39;%&#39; ) AND (capital !&#x3D; &#96;name&#96;)</span><br></pre></td></tr></table></figure>
+
+<p>15.”Monaco-Ville”是合併國家名字 “Monaco” 和延伸詞”-Ville”.</p>
+<p>顯示國家名字，及其延伸詞，如首都是國家名字的延伸。</p>
+<p>你可以使用SQL函數 <a href="https://sqlzoo.net/wiki/REPLACE" target="_blank" rel="noopener">REPLACE</a> 或 MID.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;name&#96;, REPLACE ( capital, &#96;name&#96;, &#39;&#39; ) AS ext FROM world WHERE</span><br><span class="line">	capital LIKE concat( &#96;name&#96;, &#39;%&#39; ) AND (capital !&#x3D; &#96;name&#96;)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -326,15 +383,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/04/28/01.SELECT_%E5%9F%BA%E7%A1%80/" rel="next" title="01.SELECT_基础">
+                <i class="fa fa-chevron-left"></i> 01.SELECT_基础
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/28/01.SELECT_%E5%9F%BA%E7%A1%80/" rel="prev" title="01.SELECT_基础">
-                01.SELECT_基础 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -386,17 +443,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -438,22 +486,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解为什么网站要反爬"><span class="nav-number">1.</span> <span class="nav-text">了解为什么网站要反爬</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求"><span class="nav-number">1.0.1.</span> <span class="nav-text">出于保护自身网站有价值的数据资源、保护自身网站服务器资源的目的，识别出爬虫程序，限制恶意访问请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站如何识别爬虫？"><span class="nav-number">2.</span> <span class="nav-text">网站如何识别爬虫？</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

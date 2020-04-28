@@ -229,6 +229,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/28/02.%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="扫一地落叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫一地落叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/28/02.%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/" itemprop="url">02.文字样式匹配查询</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-28T18:36:14+08:00">
+                2020-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.你可以用<code>WHERE name LIKE &#39;B%&#39;</code>來找出以 B 為開首的國家。<br>%是萬用字元,可以用代表任何字完。</p>
+<p>找出以 Y 為開首的國家。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;Y%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>2.找出以 Y 為結尾的國家。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%Y&#39;</span><br></pre></td></tr></table></figure>
+
+<p>3.“Luxembourg 盧森堡”中有一個x字母,還有一個國家的名字中有x。列出這兩個國家。</p>
+<p>找出所有國家,其名字包括字母x。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%x%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>4.“Iceland 冰島”和“Switzerland 瑞士”的名字都是以”land”作結束的。還有其他嗎?</p>
+<p>找出所有國家,其名字以 land 作結尾。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%land&#39;</span><br></pre></td></tr></table></figure>
+
+<p>5.“Columbia 哥倫比亞”是以 C 作開始,ia 作結尾的。還有兩個國家相同。</p>
+<p>找出所有國家,其名字以 C 作開始,ia 作結尾。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;C%ia&#39;</span><br></pre></td></tr></table></figure>
+
+<p>6.“Greece 希臘”中有雙 e 字。哪個國家有雙 o 字呢?</p>
+<p>找出所有國家,其名字包括字母oo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%oo%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>7.“Bahamas 巴哈馬”中有三個 a,還有嗎?</p>
+<p>找出所有國家,其名字包括三個或以上的a。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%a%a%a%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>8.“India 印度”和”Angola 安哥拉”的第二個字母都是 n。<br>你可以用底線符<code>_</code>當作單一個字母的萬用字元。</p>
+<p>找出所有國家,其名字以t作第二個字母。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;_t%&#39; ORDER BY name</span><br></pre></td></tr></table></figure>
+
+<p>9.“Lesotho 賴索托”和”Moldova 摩爾多瓦”都有兩個字母 o,被另外兩個字母相隔着。</p>
+<p>找出所有國家,其名字都有兩個字母 o,被另外兩個字母相隔着。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;%o__o%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>10.“Cuba古巴”和”Togo 多哥”都是 4 個字母。</p>
+<p>找出所有國家,其名字都是 4 個字母的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name LIKE &#39;____&#39;</span><br></pre></td></tr></table></figure>
+
+<p>11.“Luxembourg 盧森堡”的首都 capital 都同樣叫“Luxembourg”。</p>
+<p>顯示所有國家名字,其首都和國家名字是相同的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE name &#x3D; capital</span><br></pre></td></tr></table></figure>
+
+<p>12.“Mexico 墨西哥”的首都是”Mexico City”。</p>
+<p>顯示所有國家名字,其首都是國家名字加上”City”。</p>
+<p>concat函數</p>
+<p>函數<code>concat</code> 可以用來合拼兩個或以上的字串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name FROM world WHERE capital &#x3D; concat(name ,&#39; City&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>13.<strong>找出所有首都和其國家名字,而首都要有國家名字中出現。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT capital, &#96;name&#96;  FROM	world WHERE capital LIKE concat(&#39;%&#39;,&#96;name&#96;,&#39;%&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>14.<strong>找出所有首都和其國家名字,而首都是國家名字的延伸。</strong><br><strong>你應顯示 Mexico City,因它比其國家名字 Mexico 長。</strong><br><strong>你不應顯示 Luxembourg,因它的首都和國家名相是相同的。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;name&#96;,capital FROM world WHERE capital LIKE concat( &#96;name&#96;, &#39;%&#39; ) AND (capital !&#x3D; &#96;name&#96;)</span><br></pre></td></tr></table></figure>
+
+<p>15.”Monaco-Ville”是合併國家名字 “Monaco” 和延伸詞”-Ville”.</p>
+<p>顯示國家名字，及其延伸詞，如首都是國家名字的延伸。</p>
+<p>你可以使用SQL函數 <a href="https://sqlzoo.net/wiki/REPLACE" target="_blank" rel="noopener">REPLACE</a> 或 MID.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;name&#96;, REPLACE ( capital, &#96;name&#96;, &#39;&#39; ) AS ext FROM world WHERE</span><br><span class="line">	capital LIKE concat( &#96;name&#96;, &#39;%&#39; ) AND (capital !&#x3D; &#96;name&#96;)</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/28/01.SELECT_%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -523,7 +702,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
