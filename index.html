@@ -229,6 +229,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/29/01_%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80_HTTP%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="扫一地落叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫一地落叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/29/01_%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80_HTTP%E5%8E%9F%E7%90%86/" itemprop="url">01_爬虫基础_HTTP原理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-29T21:10:50+08:00">
+                2020-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP原理"><a href="#HTTP原理" class="headerlink" title="HTTP原理"></a>HTTP原理</h1><p>##1. URI和URL</p>
+<p>URI的全称为：Uniform Resource Identifier,即统一资源标志符。</p>
+<ul>
+<li><p>URL的全称为：Universal Resource Locator，即统一资源定位符。</p>
+</li>
+<li><p>URN的全称为：Universal Resource Name, 即统一资源名称。</p>
+</li>
+</ul>
+<p>​        例子：<a href="https://github.com/favicon.ico。" target="_blank" rel="noopener">https://github.com/favicon.ico。</a> 是Github的网站图标链接，它是一个URL，也是一个URI。这个是一图标资源，我们用URL/URI来唯一指定了它的访问方式，其中包括（访问协议https、访问路径“/即根目录”和资源名称favicon.ic）。通过这样一个链接，我们可以从互联网上找到这个资源，这就是URL/URI。</p>
+<p>​        URN：只命名资源而不指定如何定位资源。 即：唯一标识了这本书，但是没有指定到哪里定位这本书。</p>
+<p>​        URL是URI的子集，也就是说每个URL都是URI，但不是每个URI都是URL。URN也是URI的子集。URN用的非常少。</p>
+<h2 id="2-超文本"><a href="#2-超文本" class="headerlink" title="2.超文本"></a>2.超文本</h2><p>​        概念——超文本， 英文名叫作hypertext <strong>[ˈhaɪpətekst]</strong>， 在浏览器里看到的网页就是超文本解析而成的。其网页源代码是一系列HTML代码，里面有很多各种各样的标签，浏览器解析这些标签后，便形成了我们平时看到的网页。而网页的源代码HTML就可以称为超文本。</p>
+<p>Chrome浏览器点击检查打开，Elements <strong>[‘elimənts]</strong> 选项卡即可看到当前网页的源代码，这些源代码就是超文本。</p>
+<h2 id="3-http和https"><a href="#3-http和https" class="headerlink" title="3. http和https"></a>3. http和https</h2><p>URL的开头都会有http或者https，这就是访问资源需要的协议类型。</p>
+<p>​        HTTP的全称是 Hyper Text Transfer Protocol, 中文名叫作超文本传输协议，HTTP协议是用于从网络传输超文本数据到本地浏览器的传输协议，它能保证高效而准确的传送超文本文档。目前广泛使用的是HTTP 1.1 版本。</p>
+<p>​        HTTPS的全称是Hyper Text Transfer Protocol over Secure Socket Layer， 是以安全为目标的HTTP通道，简单讲就是HTTP的安全版，即HTTP下加入SSL层，简称HTTPS。</p>
+<p>​        主要作用：</p>
+<pre><code>* 建立一个信息安全通道来保证数据传输的安全
+* 确认网站的真实性。CA证书</code></pre><p>如果要爬取https这样的站点，就需要设置忽略证书的选项，否则会提示SSL链接错误。</p>
+<p>下篇内容：</p>
+<p>4.请求过程</p>
+<p>5.请求</p>
+<p>6.响应</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/29/03.%E5%AF%B9%E8%A1%A8%E6%A0%BCWorld%20%E6%9F%A5%E8%AF%A2%E5%85%A8%E7%90%83%E5%90%84%E5%9B%BD%E7%9A%84%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -863,7 +1005,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
