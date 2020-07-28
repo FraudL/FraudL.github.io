@@ -229,6 +229,276 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/05/05/01_mini_web_%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="扫一地落叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫一地落叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/01_mini_web_%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82/" itemprop="url">01_mini_web_动态页面请求</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T21:58:47+08:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器请求动态页面过程"><a href="#浏览器请求动态页面过程" class="headerlink" title="浏览器请求动态页面过程"></a>浏览器请求动态页面过程</h2><ol>
+<li>浏览器通过http 协议向web 服务器请求动态资源</li>
+<li>web 服务器通过WSGI（威士忌）协议向应用程序框架调用一个属性</li>
+<li>应用程序框架通过引用调用web服务器的方法，设置返回的状态和头信息</li>
+<li>调用返回，此时web服务器端保存了刚刚设置的信息</li>
+<li>查询数据库等，生成动态页面的body信息</li>
+<li>把生成body信息返回给web服务器的调用</li>
+<li>web 服务器把数据返回给浏览器</li>
+</ol>
+<h3 id="应用程序示例"><a href="#应用程序示例" class="headerlink" title="应用程序示例"></a>应用程序示例</h3><p>####web/my_web.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(environ, start_response)</span>:</span></span><br><span class="line">		status = <span class="string">'200 OK'</span></span><br><span class="line">    response_headers = [(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)]</span><br><span class="line">    start_response(status, response_headers)</span><br><span class="line">    <span class="keyword">return</span> str(environ)+<span class="string">'==Hello world from a simple WSGI application!---&gt;%s\n'</span> %  time.ctime()</span><br></pre></td></tr></table></figure>
+
+<h4 id="web-server-py"><a href="#web-server-py" class="headerlink" title="web_server.py"></a>web_server.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WSGIServer</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""定义一个WSGI服务器的类"""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, port, documents_root, app)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 1. 创建套接字</span></span><br><span class="line">        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">        <span class="comment"># 2. 绑定本地信息</span></span><br><span class="line">        self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">        self.server_socket.bind((<span class="string">""</span>, port))</span><br><span class="line">        <span class="comment"># 3. 变为监听套接字</span></span><br><span class="line">        self.server_socket.listen(<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设定资源文件的路径</span></span><br><span class="line">        self.documents_root = documents_root</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设定web框架可以调用的函数(对象)</span></span><br><span class="line">        self.app = app</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run_forever</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""运行服务器"""</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 等待对方链接</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            new_socket, new_addr = self.server_socket.accept()</span><br><span class="line">            <span class="comment"># 创建一个新的进程来完成这个客户端的请求任务</span></span><br><span class="line">            new_socket.settimeout(<span class="number">3</span>)  <span class="comment"># 3s</span></span><br><span class="line">            new_process = multiprocessing.Process(target=self.deal_with_request, args=(new_socket,))</span><br><span class="line">            new_process.start()</span><br><span class="line">            new_socket.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deal_with_request</span><span class="params">(self, client_socket)</span>:</span></span><br><span class="line">        <span class="string">"""以长链接的方式，为这个浏览器服务器"""</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                request = client_socket.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> ret:</span><br><span class="line">                print(<span class="string">"========&gt;"</span>, ret)</span><br><span class="line">                client_socket.close()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 判断浏览器是否关闭</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> request:</span><br><span class="line">                client_socket.close()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            request_lines = request.splitlines()</span><br><span class="line">            <span class="keyword">for</span> i, line <span class="keyword">in</span> enumerate(request_lines):</span><br><span class="line">                print(i, line)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 提取请求的文件(index.html)</span></span><br><span class="line">            <span class="comment"># GET /a/b/c/d/e/index.html HTTP/1.1</span></span><br><span class="line">            ret = re.match(<span class="string">r"([^/]*)([^ ]+)"</span>, request_lines[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">if</span> ret:</span><br><span class="line">                print(<span class="string">"正则提取数据:"</span>, ret.group(<span class="number">1</span>))</span><br><span class="line">                print(<span class="string">"正则提取数据:"</span>, ret.group(<span class="number">2</span>))</span><br><span class="line">                file_name = ret.group(<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">if</span> file_name == <span class="string">"/"</span>:</span><br><span class="line">                    file_name = <span class="string">"/index.html"</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果不是以py结尾的文件，认为是普通的文件</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> file_name.endswith(<span class="string">".py"</span>):</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 读取文件数据</span></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    f = open(self.documents_root+file_name, <span class="string">"rb"</span>)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    response_body = <span class="string">"file not found, 请输入正确的url"</span></span><br><span class="line"></span><br><span class="line">                    response_header = <span class="string">"HTTP/1.1 404 not found\r\n"</span></span><br><span class="line">                    response_header += <span class="string">"Content-Type: text/html; charset=utf-8\r\n"</span></span><br><span class="line">                    response_header += <span class="string">"Content-Length: %d\r\n"</span> % (len(response_body))</span><br><span class="line">                    response_header += <span class="string">"\r\n"</span></span><br><span class="line"></span><br><span class="line">                    response = response_header + response_body</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 将header返回给浏览器</span></span><br><span class="line">                    client_socket.send(response.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    content = f.read()</span><br><span class="line">                    f.close()</span><br><span class="line"></span><br><span class="line">                    response_body = content</span><br><span class="line"></span><br><span class="line">                    response_header = <span class="string">"HTTP/1.1 200 OK\r\n"</span></span><br><span class="line">                    response_header += <span class="string">"Content-Length: %d\r\n"</span> % (len(response_body))</span><br><span class="line">                    response_header += <span class="string">"\r\n"</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 将header返回给浏览器</span></span><br><span class="line">                    client_socket.send(response_header.encode(<span class="string">'utf-8'</span>) + response_body)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 以.py结尾的文件，就认为是浏览需要动态的页面</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 准备一个字典，里面存放需要传递给web框架的数据</span></span><br><span class="line">                env = &#123;&#125;</span><br><span class="line">                <span class="comment"># 存web返回的数据</span></span><br><span class="line">                response_body = self.app(env, self.set_response_headers)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 合并header和body</span></span><br><span class="line">                response_header = <span class="string">"HTTP/1.1 &#123;status&#125;\r\n"</span>.format(status=self.headers[<span class="number">0</span>])</span><br><span class="line">                response_header += <span class="string">"Content-Type: text/html; charset=utf-8\r\n"</span></span><br><span class="line">                response_header += <span class="string">"Content-Length: %d\r\n"</span> % len(response_body)</span><br><span class="line">                <span class="keyword">for</span> temp_head <span class="keyword">in</span> self.headers[<span class="number">1</span>]:</span><br><span class="line">                    response_header += <span class="string">"&#123;0&#125;:&#123;1&#125;\r\n"</span>.format(*temp_head)</span><br><span class="line"></span><br><span class="line">                response = response_header + <span class="string">"\r\n"</span></span><br><span class="line">                response += response_body</span><br><span class="line"></span><br><span class="line">                client_socket.send(response.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_response_headers</span><span class="params">(self, status, headers)</span>:</span></span><br><span class="line">        <span class="string">"""这个方法，会在 web框架中被默认调用"""</span></span><br><span class="line">        response_header_default = [</span><br><span class="line">            (<span class="string">"Data"</span>, time.ctime()),</span><br><span class="line">            (<span class="string">"Server"</span>, <span class="string">"ItCast-python mini web server"</span>)</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将状态码/相应头信息存储起来</span></span><br><span class="line">        <span class="comment"># [字符串, [xxxxx, xxx2]]</span></span><br><span class="line">        self.headers = [status, response_header_default + headers]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置静态资源访问的路径</span></span><br><span class="line">g_static_document_root = <span class="string">"./html"</span></span><br><span class="line"><span class="comment"># 设置动态资源访问的路径</span></span><br><span class="line">g_dynamic_document_root = <span class="string">"./web"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""控制web服务器整体"""</span></span><br><span class="line">    <span class="comment"># python3 xxxx.py 7890</span></span><br><span class="line">    <span class="keyword">if</span> len(sys.argv) == <span class="number">3</span>:</span><br><span class="line">        <span class="comment"># 获取web服务器的port</span></span><br><span class="line">        port = sys.argv[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> port.isdigit():</span><br><span class="line">            port = int(port)</span><br><span class="line">        <span class="comment"># 获取web服务器需要动态资源时，访问的web框架名字</span></span><br><span class="line">        web_frame_module_app_name = sys.argv[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"运行方式如: python3 xxx.py 7890 my_web_frame_name:application"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"http服务器使用的port:%s"</span> % port)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将动态路径即存放py文件的路径，添加到path中，这样python就能够找到这个路径了</span></span><br><span class="line">    sys.path.append(g_dynamic_document_root)</span><br><span class="line"></span><br><span class="line">    ret = re.match(<span class="string">r"([^:]*):(.*)"</span>, web_frame_module_app_name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        <span class="comment"># 获取模块名</span></span><br><span class="line">        web_frame_module_name = ret.group(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 获取可以调用web框架的应用名称</span></span><br><span class="line">        app_name = ret.group(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 导入web框架的主模块</span></span><br><span class="line">    web_frame_module = __import__(web_frame_module_name)</span><br><span class="line">    <span class="comment"># 获取那个可以直接调用的函数(对象)</span></span><br><span class="line">    app = getattr(web_frame_module, app_name) </span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(app)  # for test</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动http服务器</span></span><br><span class="line">    http_server = WSGIServer(port, g_static_document_root, app)</span><br><span class="line">    <span class="comment"># 运行http服务器</span></span><br><span class="line">    http_server.run_forever()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><h5 id="打开终端，输入一下命令开始服务器"><a href="#打开终端，输入一下命令开始服务器" class="headerlink" title="打开终端，输入一下命令开始服务器"></a>打开终端，输入一下命令开始服务器</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 web_server.py my_web:application</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/30/01.Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="扫一地落叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫一地落叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/30/01.Git/" itemprop="url">01.Git</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-30T21:22:29+08:00">
+                2020-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><h4 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit  提交一次代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;name&gt;    创建、切换分支</span><br></pre></td></tr></table></figure>
+
+<h4 id="Git-Merge"><a href="#Git-Merge" class="headerlink" title="Git Merge"></a>Git Merge</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;分支_name&gt;     合并分支，name是要合并的分支，会合并到当前最新的分支</span><br></pre></td></tr></table></figure>
+
+<h4 id="Git-Rebase"><a href="#Git-Rebase" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rebase  &lt;分支_name&gt;   合并分支.  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">只是把分支复制到master分支上，master主支还没有更新，分支继承master。使用这个命令会更新master分支，master分支的引用向前移动，并且合并到一起。</span><br></pre></td></tr></table></figure>
+
+<h4 id="分离-HEAD"><a href="#分离-HEAD" class="headerlink" title="分离 HEAD"></a>分离 HEAD</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HEAD总是指向当前分支上最近一次提交记录</span><br><span class="line"></span><br><span class="line">想查看HEAD指向，通过 cat .git&#x2F;HEAD 查看  或 git symbolic-ref HEAD</span><br><span class="line"></span><br><span class="line">指向状态：HEAD-&gt; master -&gt; C1(记录) git checkout C1之后的指向状态：HEAD-&gt;C1, master -&gt; C1</span><br></pre></td></tr></table></figure>
+
+<h4 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用(^)"></a>相对引用(^)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 使用^向上移动1个提交记录</span><br><span class="line">2. 使用~&lt;num&gt; 向上移动多个提交记录， 如~2</span><br><span class="line">   使用git branch -f master HEAD~3  将master分支强制指向HEAD的第3级父提交</span><br><span class="line">   先把HEAD切换到master，然后合并到bugFix，然后再引用</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://fraudl.github.io/2020/04/29/01_%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80_HTTP%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1005,7 +1275,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
